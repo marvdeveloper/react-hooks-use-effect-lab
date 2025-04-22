@@ -4,18 +4,19 @@ import quiz from "../data/quiz";
 
 function App() {
   const [questions, setQuestions] = useState(quiz);
-  const [currentQuestionId, setCurrentQuestion] = useState(1);
+  const [currentQuestionId, setCurrentQuestionId] = useState(1);
   const [score, setScore] = useState(0);
   const currentQuestion = questions.find((q) => q.id === currentQuestionId);
 
   function handleQuestionAnswered(correct) {
     if (currentQuestionId < questions.length) {
-      setCurrentQuestion((currentQuestionId) => currentQuestionId + 1);
+      setCurrentQuestionId((prev) => prev + 1); // Move to the next question
     } else {
-      setCurrentQuestion(null);
+      setCurrentQuestionId(1); // Restart from the first question
+      setScore(0); // Reset score
     }
     if (correct) {
-      setScore((score) => score + 1);
+      setScore((prevScore) => prevScore + 1); // Increase score if correct answer
     }
   }
 
